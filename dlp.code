@@ -1,0 +1,18 @@
+
+url = f"{GITLAB_URL}/api/v4/users?username={USERNAME}"
+headers = {"Private-Token": TOKEN}
+
+response = requests.get(url, headers=headers)
+
+if response.status_code == 200:
+    users = response.json()
+    if users:
+        user = users[0]
+        print(f"User '{USERNAME}' có ID: {user['id']}")
+    else:
+        print("Không tìm thấy user.")
+else:
+    print(f"Lỗi: {response.status_code} - {response.text}")
+
+url = f"{GITLAB_URL}/api/v4/users/{USER_ID}"
+headers = {"Private-Token": TOKEN}
